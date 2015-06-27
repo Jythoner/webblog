@@ -2,7 +2,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-# Create your models here.
+
 
 STATUS = {
     0: u'正常',
@@ -59,6 +59,7 @@ class Article(models.Model):
     pub_time = models.DateTimeField(default=False, verbose_name=u'发布时间')
     create_time = models.DateTimeField(auto_now_add=True, verbose_name=u'创建时间')
     update_time = models.DateTimeField(auto_now=True, verbose_name=u'更新时间')
+
 
     def __unicode__(self):
         return self.title

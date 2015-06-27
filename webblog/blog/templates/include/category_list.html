@@ -1,0 +1,18 @@
+<div class="widget-wrap">
+    <h3 class="widget-title"><i class="fa fa-leanpub" style="color: #707070"></i>  分类</h3>
+
+    <div class="widget">
+        <ul class="category-list">
+
+            {% if category_list %}
+                {% for category in category_list %}
+                    <li class="category-list-item">
+                    <a class="category-list-link" href="{% url 'blog:category' category.en_name %}">{{ category.name }}</a>
+                    <span class="category-list-count">{{ category.article_set.count }}</span>
+                    </li>
+                {% endfor %}
+            {% endif %}
+
+        </ul>
+    </div>
+</div>

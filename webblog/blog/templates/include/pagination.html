@@ -1,0 +1,19 @@
+    <nav id="page-nav">
+    {% if page_obj.has_previous %}
+        <a class="extend prev" rel="prev" href="?page={{ page_obj.previous_page_number }}"><span>&lt;&lt;</span>Prev</a>
+    {% else %}
+        <a class="extend prev" rel="prev"><span>&lt;&lt;</span> Prev</a>
+    {% endif %}
+    {% for i in page_obj.paginator.page_range %}
+        {% ifequal i page_obj.number %}
+            <span class="page-number current">{{ page_obj.number }}</span>
+        {% else %}
+            <a class="page-number" href="?page={{ i }}">{i}</a>
+        {% endifequal %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+        <a class="extend next" rel="next" href="?page={{ page_obj.next_page_number }}">Next<span>&gt;&gt;</span></a>
+    {% else %}
+        <a class="extend next" rel="next">Next <span>&gt;&gt;</span></a>
+    {% endif %}
+</nav>
