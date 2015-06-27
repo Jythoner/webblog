@@ -14,11 +14,8 @@ class BaseMixin(object):
         context = super(BaseMixin, self).get_context_data(**kwargs)
 
         try:
-
             context['recently_article'] = Article.objects.values('title', 'en_title').filter(status=0).order_by('-create_time')[:10]
             context['tag_cloud_list'] = Tag.objects.values('name', 'en_name').filter(status=0)
-
-
             context['category_list'] = Category.objects.filter(status=0)
         except Exception as e:
             logger.error(u'[BaseMixin]加载出错')
