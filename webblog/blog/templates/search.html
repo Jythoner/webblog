@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% if title %}
+    {% block title %}{{ title }}{% endblock %}
+{% endif %}
+
+{% block main %}
+
+    {% if article_list %}
+        {% with post_list=article_list %}
+            {% for post in post_list %}`
+                <article class="article">
+                    <div class="article-meta">
+                        <a href="{% url 'blog:detail' post.en_title %}" class="article-date">
+                            <time>{{ post.pub_time | date:'m-d-Y' }}</time>
+                        </a>
+
+                        <div class="article-category">
+                            <a class="article-category-link"
+                               href="{% url 'blog:category' post.category %}">{{ post.category }}</a>
+                        </div>
+                        <div class="article-category">
+                            <a class="article-category-link">{{ post.view_times }}℃</a>
+                        </div>
+
+                    </div>
+                    <div class="article-inner">
+
+                        <header class="article-header">
+
+                            <h1>
+                                <a class="article-title"
+                                   href="{% url 'blog:detail' post.en_title %}">{{ post.title }}</a>
+                            </h1>
+
+
+                        </header>
+
+                        <div class="article-entry">
+
+                            <p>
+                                {{ post.summary | slice:"120" }}
+                                {% if post.summary > 120 %}
+                                    ...
+                                {% endif %}
+
+                            </p>
+
+                            <div class="permalink">
+                                <a href="{% url 'blog:detail' post.en_title %}" class="btn btn-default">Read
+                                    More</a>
+                            </div>
+
+
+                        </div>
+
+                        <footer class="article-footer">
+
+                            <a class="article-share-link" data-share="baidu">Share</a>
+
+                            <a href="#"
+                               class="article-comment-link">Comments</a>
+
+                        </footer>
+                    </div>
+
+                </article>
+            {% endfor %}
+        {% endwith %}
+    {% endif %}
+
+    <nav id="page-nav">
+        {% if page_obj.has_previous %}
+            <a class="extend prev" rel="prev"
+               href="?s={{ s }}&page={{ page_obj.previous_page_number }}"><span>&lt;&lt;</span> Prev</a>
+        {% else %}
+            <a class="extend prev" rel="prev"><span>&lt;&lt;</span> Prev</a>
+        {% endif %}
+        {% for i in page_obj.paginator.page_range %}
+            {% if i == page_obj.number %}
+                <span class="page-number current">{{ page_obj.number }}</span>
+            {% else %}
+                <a class="page-number" href="?s={{ s }}&page={{ i }}">{i}</a>
+            {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+            <a class="extend next" rel="next" href="?s={{ s }}&page={{ page_obj.next_page_number }}">Next
+                <span>&gt;&gt;</span></a>
+        {% else %}
+            <a class="extend next" rel="next">Next <span>&gt;&gt;</span></a>
+        {% endif %}
+    </nav>
+
+
+{% endblock %}

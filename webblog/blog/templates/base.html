@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+
+    <title>{% block title %}{% endblock %} 河图洛书</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Python Django Docker Scrapy">
+    <link rel="icon" href="/static/favicon.ico">
+
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css">
+
+    <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+
+    <style type="text/css"></style>
+    <script type="text/javascript" async="" src="/static/js/embed.js" charset="UTF-8"></script>
+    <script src="/static/js/share.js"></script>
+    <link type="text/css" rel="stylesheet" href="/static/css/embed.default.css">
+
+</head>
+<body>
+<div id="container">
+    <div id="wrap">
+        <!-- navbar start-->
+
+        {% include 'include/nav.html' %}
+
+        <!-- navbar end-->
+        <div class="outer">
+            <section id="main">
+
+                {% block main %} {% endblock %}
+
+            </section>
+
+            <!-- side widget start-->
+            <aside id="sidebar">
+                {% include 'include/tag_cloud.html' %}
+                {% include 'include/recently_article.html' %}
+                {% include 'include/category_list.html' %}
+
+            </aside>
+            <!-- side widget end-->
+        </div>
+
+
+        <!-- footer start -->
+        {% include 'include/footer.html' %}
+        <!-- footer end -->
+
+    </div>
+    <nav id="mobile-nav">
+
+        <a href="/" class="mobile-nav-link">Home</a>
+
+        <a href="#" class="mobile-nav-link">Archives</a>
+
+    </nav>
+    <!-- totop start -->
+    <a href="#" id="back" style="display: inline">
+        <i class="fa fa-long-arrow-up"></i>
+    </a>
+    <!-- totop end -->
+
+    <!-- 百度分享 start -->
+
+    <div id="article-share-box" class="article-share-box">
+        <div id="bdshare" class="bdsharebuttonbox article-share-links bdshare-button-style0-16"
+             data-bd-bind="1434158930979">
+            <a class="article-share-weibo" data-cmd="tsina" target="_blank" title="分享到新浪微博"></a>
+            <a class="article-share-weixin" data-cmd="weixin" target="_blank" title="分享到微信"></a>
+            <a class="article-share-qq" data-cmd="sqq" target="_blank" title="分享到QQ"></a>
+            <a class="article-share-twitter" data-cmd="twi" target="_blank" title="分享到twitter"></a>
+            <a class="article-share-facebook" data-cmd="fbook" target="_blank" title="分享到facebook"></a>
+        </div>
+    </div>
+    <script>window._bd_share_config = {share:{"bdCustomStyle": '/static/css/my.css'}};
+    with (document)0[(getElementsByTagName("head")[0] || body).appendChild(createElement("script")).src = "http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=" + ~(-new Date() / 36e5)];</script>
+
+    <!-- 百度分享 end -->
+
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/script.js" type="text/javascript"></script>
+    <script src="/static/js/cos-particle.js" type="text/javascript"></script>
+    <script src="/static/js/cos-float.js" type="text/javascript"></script>
+</div>
+</body>
+</html>

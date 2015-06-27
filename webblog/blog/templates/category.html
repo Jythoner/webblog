@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% if title %}
+    {% block title %}{{ title }}{% endblock %}
+{% endif %}
+{% block main %}
+
+    {% if article_list %}
+        {% with post_list=article_list %}
+            {% for post in post_list %}
+                <article class="article">
+                    <div class="article-meta">
+                        <a href="{% url 'blog:detail' post.en_title %}" class="article-date">
+                            <time>{{ post.pub_time | date:'m-d-Y' }}</time>
+                        </a>
+
+                        <div class="article-category">
+                            <a class="article-category-link"
+                               href="{% url 'blog:category' post.category %}">{{ post.category }}</a>
+                        </div>
+                        <div class="article-category">
+                            <a class="article-category-link">{{ post.view_times }}℃</a>
+                        </div>
+
+                    </div>
+                    <div class="article-inner">
+
+                        <header class="article-header">
+
+                            <h1>
+                                <a class="article-title"
+                                   href="{% url 'blog:detail' post.en_title %}">{{ post.title }}</a>
+                            </h1>
+
+
+                        </header>
+
+                        <div class="article-entry">
+
+                            <p>
+                                {{ post.summary | slice:"120" }}
+                                {% if post.summary > 120 %}
+                                    ...
+                                {% endif %}
+
+                            </p>
+
+                            <div class="permalink">
+                                <a href="{% url 'blog:detail' post.en_title %}" class="btn btn-default">Read
+                                    More</a>
+                            </div>
+
+
+                        </div>
+
+                        <footer class="article-footer">
+
+                            <a class="article-share-link" data-share="baidu">Share</a>
+
+                            <a href="#"
+                               class="article-comment-link">Comments</a>
+
+                        </footer>
+                    </div>
+
+                </article>
+            {% endfor %}
+        {% endwith %}
+    {% endif %}
+
+    {% if page_obj %}
+        {% include 'include/pagination.html' %}
+    {% endif %}
+
+{% endblock %}
