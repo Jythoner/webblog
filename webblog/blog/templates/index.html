@@ -12,7 +12,7 @@
 
                         <div class="article-category">
                             <a class="article-category-link"
-                               href="{% url 'blog:category' post.category %}">{{ post.category }}</a>
+                               href="{% url 'blog:category' post.category.en_name %}">{{ post.category }}</a>
                         </div>
                         <div class="article-category">
                             <a class="article-category-link">{{ post.view_times }}℃</a>

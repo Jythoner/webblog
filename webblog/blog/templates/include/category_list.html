@@ -4,14 +4,12 @@
     <div class="widget">
         <ul class="category-list">
 
-            {% if category_list %}
                 {% for category in category_list %}
                     <li class="category-list-item">
                     <a class="category-list-link" href="{% url 'blog:category' category.en_name %}">{{ category.name }}</a>
                     <span class="category-list-count">{{ category.article_set.count }}</span>
                     </li>
                 {% endfor %}
-            {% endif %}
 
         </ul>
     </div>

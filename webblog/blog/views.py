@@ -12,11 +12,10 @@ class BaseMixin(object):
 
     def get_context_data(self, *args, **kwargs):
         context = super(BaseMixin, self).get_context_data(**kwargs)
-
         try:
             context['recently_article'] = Article.objects.values('title', 'en_title').filter(status=0).order_by('-create_time')[:10]
             context['tag_cloud_list'] = Tag.objects.values('name', 'en_name').filter(status=0)
-            context['category_list'] = Category.objects.filter(status=0)
+            context['category_list'] = Category.objects.prefetch_related('article_set').filter(status=0)
         except Exception as e:
             logger.error(u'[BaseMixin]加载出错')
 
@@ -30,7 +29,7 @@ class IndexView(BaseMixin, ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        article_list = Article.objects.filter(status=0)
+        article_list = Article.objects.select_related('category').filter(status=0)
         return article_list
 
 
@@ -43,7 +42,7 @@ class CategoryView(BaseMixin, ListView):
     def get_queryset(self):
         self.category = self.kwargs.get('category',)
         try:
-            article_list = Category.objects.get(en_name=self.category).article_set.all()
+            article_list = Category.objects.prefetch_related('article_set').get(en_name=self.category).article_set.all()
         except Category.DoesNotExist:
             logger.error(u'[CategoryView]此分类不存在:[%s]' % Category)
             raise Http404
@@ -64,7 +63,7 @@ class TagView(BaseMixin, ListView):
 
     def get_queryset(self):
         self.tag = self.kwargs.get('tag',)
-        article_list = Tag.objects.get(en_name=self.tag).article_set.all()
+        article_list = Article.objects.select_related('category').filter(tag__en_name=self.tag)
         return article_list
 
     def get_context_data(self, *args, **kwargs):
@@ -82,7 +81,8 @@ class SearchView(BaseMixin, ListView):
     def get_queryset(self):
         self.s = self.request.GET.get('s',)
         if self.s:
-            article_list = Article.objects.only('title', 'content').filter(Q(title__icontains=self.s)|Q(content__icontains=self.s), status=0)
+            qset = (Q(title__icontains=self.s)|Q(content__icontains=self.s)|Q(summary__icontains=self.s))
+            article_list = Article.objects.select_related('category').filter(qset, status=0)
         else:
             article_list = Article.objects.defer('content').filter(status=0)
 
