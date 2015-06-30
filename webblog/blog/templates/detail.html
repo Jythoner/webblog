@@ -57,30 +57,15 @@
         </div>
     </article>
 
+    {% include 'include/page_num.html' %}
+    {% include 'include/duoshuo.html' %}
+
 {% endblock %}
 
-{% block page %}
 
-    <nav id="article-nav">
-        {% if pre_article %}
-            <a href="{% url 'blog:detail' pre_article.en_title %}" id="article-nav-newer" class="article-nav-link-wrap">
-                <strong class="article-nav-caption">The Previous</strong>
 
-                <div class="article-nav-title">
-                    {{ pre_article.title }}
-                </div>
-            </a>
-        {% endif %}
-        {% if next_article %}
-            <a href="{% url 'blog:detail' next_article.en_title %}" id="article-nav-older"
-               class="article-nav-link-wrap">
-                <strong class="article-nav-caption">The Next</strong>
 
-                <div class="article-nav-title">{{ next_article.title }}</div>
-            </a>
-        {% endif %}
-    </nav>
-{% endblock %}
 
-{% include 'include/duoshuo.html' %}
+
+
 
