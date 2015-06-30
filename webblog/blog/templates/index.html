@@ -15,7 +15,7 @@
                                href="{% url 'blog:category' post.category.en_name %}">{{ post.category }}</a>
                         </div>
                         <div class="article-category">
-                            <a class="article-category-link">{{ post.view_times }}℃</a>
+                            <a class="article-category-link">{{ post.view_time }}℃</a>
                         </div>
 
                     </div>
@@ -53,7 +53,7 @@
 
                             <a class="article-share-link" data-share="baidu">Share</a>
 
-                            <a href="#"
+                            <a href="{% url 'blog:detail' post.en_title %}#ds-thread"
                                class="article-comment-link">Comments</a>
 
                         </footer>

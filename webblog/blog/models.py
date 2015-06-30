@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 from django.contrib.auth.models import User
 from django.db import models
-
+import markdown2
 
 
 STATUS = {
@@ -52,7 +52,8 @@ class Article(models.Model):
     tag = models.ManyToManyField(Tag, blank=True, verbose_name=u'标签')
     summary = models.TextField(verbose_name=u'摘要')
     content = models.TextField(verbose_name=u'内容')
-    view_time = models.IntegerField(default=0, verbose_name=u'访问次数')
+    content_html = models.TextField(editable=False, blank=True, null=True)
+    view_time = models.IntegerField(editable=False, default=0, verbose_name=u'访问次数')
     status = models.IntegerField(default=0, choices=STATUS.items(), verbose_name=u'状态')
     rank = models.IntegerField(default=0, verbose_name=u'排序')
 
@@ -60,6 +61,10 @@ class Article(models.Model):
     create_time = models.DateTimeField(auto_now_add=True, verbose_name=u'创建时间')
     update_time = models.DateTimeField(auto_now=True, verbose_name=u'更新时间')
 
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        self.content_html = markdown2.markdown(self.content, extras=['fenced-code-blocks']).encode('utf-8')
+        super(Article, self).save()
 
     def __unicode__(self):
         return self.title

@@ -1,7 +1,6 @@
 # -*- coding:utf-8 -*-
-from django.db.models import Q
+from django.db.models import Q, F
 from django.http import Http404
-from django.shortcuts import render
 from django.views.generic import ListView, DetailView, ArchiveIndexView
 from .models import Category, Tag, Article
 import logging
@@ -10,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 class BaseMixin(object):
 
-    def get_context_data(self, *args, **kwargs):
+    def get_context_data(self, **kwargs):
         context = super(BaseMixin, self).get_context_data(**kwargs)
         try:
             context['recently_article'] = Article.objects.values('title', 'en_title').filter(status=0).order_by('-create_time')[:10]
@@ -49,7 +48,7 @@ class CategoryView(BaseMixin, ListView):
 
         return article_list
 
-    def get_context_data(self, *args, **kwargs):
+    def get_context_data(self, **kwargs):
         context = super(CategoryView, self).get_context_data(**kwargs)
         context['title'] = self.category + ' |'
         return context
@@ -66,7 +65,7 @@ class TagView(BaseMixin, ListView):
         article_list = Article.objects.select_related('category').filter(tag__en_name=self.tag)
         return article_list
 
-    def get_context_data(self, *args, **kwargs):
+    def get_context_data(self, **kwargs):
         context = super(TagView, self).get_context_data(**kwargs)
         context['title'] = self.tag + ' |'
         return context
@@ -88,7 +87,7 @@ class SearchView(BaseMixin, ListView):
 
         return article_list
 
-    def get_context_data(self, *args, **kwargs):
+    def get_context_data(self, **kwargs):
         context = super(SearchView, self).get_context_data(**kwargs)
         context['title'] = self.s + ' |'
         context['s'] = self.s
@@ -96,4 +95,34 @@ class SearchView(BaseMixin, ListView):
 
 
 class ArticleDetailView(BaseMixin, DetailView):
-    pass
+
+    queryset = Article.objects.filter(status=0)
+    context_object_name = 'article'
+    template_name = 'detail.html'
+    slug_field = 'en_title'
+
+    def get(self, request, *args, **kwargs):
+        self.en_title = self.kwargs.get('slug',)
+        self.article = self.queryset.prefetch_related('tag').get(en_title=self.en_title)
+        self.queryset.update(view_time=F('view_time')+1)
+        return super(ArticleDetailView, self).get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(ArticleDetailView, self).get_context_data(**kwargs)
+        pre_article_id = self.article.id + 1
+        next_article_id = self.article.id - 1
+        try:
+            pre_article = Article.objects.get(id=pre_article_id)
+        except Article.DoesNotExist:
+            pre_article = None
+
+        try:
+            next_article = Article.objects.get(id=next_article_id)
+        except Article.DoesNotExist:
+            next_article = None
+
+        context['pre_article'] = pre_article
+        context['next_article']= next_article
+        context['title'] = self.en_title + ' |'
+        return context
+

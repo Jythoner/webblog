@@ -12,14 +12,12 @@
     <link rel="stylesheet" href="/static/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="/static/css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="/static/css/style.css" type="text/css">
+    <link type="text/css" rel="stylesheet" href="/static/css/fruity.css">
 
     <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
 
     <style type="text/css"></style>
-    <script type="text/javascript" async="" src="/static/js/embed.js" charset="UTF-8"></script>
     <script src="/static/js/share.js"></script>
-    <link type="text/css" rel="stylesheet" href="/static/css/embed.default.css">
-
 </head>
 <body>
 <div id="container">
@@ -33,6 +31,7 @@
             <section id="main">
 
                 {% block main %} {% endblock %}
+                {% block page %}{% endblock %}
 
             </section>
 
@@ -52,13 +51,7 @@
         <!-- footer end -->
 
     </div>
-    <nav id="mobile-nav">
 
-        <a href="/" class="mobile-nav-link">Home</a>
-
-        <a href="#" class="mobile-nav-link">Archives</a>
-
-    </nav>
     <!-- totop start -->
     <a href="#" id="back" style="display: inline">
         <i class="fa fa-long-arrow-up"></i>
@@ -77,7 +70,7 @@
             <a class="article-share-facebook" data-cmd="fbook" target="_blank" title="分享到facebook"></a>
         </div>
     </div>
-    <script>window._bd_share_config = {share:{"bdCustomStyle": '/static/css/my.css'}};
+    <script>window._bd_share_config = {share: {"bdCustomStyle": '/static/css/my.css'}};
     with (document)0[(getElementsByTagName("head")[0] || body).appendChild(createElement("script")).src = "http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=" + ~(-new Date() / 36e5)];</script>
 
     <!-- 百度分享 end -->

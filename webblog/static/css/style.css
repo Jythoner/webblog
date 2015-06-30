@@ -1012,6 +1012,15 @@ a.article-title:hover {
     zoom: 1;
     position: relative;
 }
+#article-nav a{
+    font-weight: bold;
+    color: teal;
+    opacity: 0.4;
+}
+#article-nav a:hover{
+    text-decoration: none;
+    opacity: 1;
+}
 
 #article-nav:before,
 #article-nav:after {
@@ -1085,9 +1094,8 @@ a.article-title:hover {
 }
 
 .article-nav-caption {
-    text-transform: uppercase;
+    text-transform: capitalize;
     letter-spacing: 2px;
-    color: #ddd;
     line-height: 1em;
     font-weight: bold;
 }
@@ -1096,8 +1104,9 @@ a.article-title:hover {
     margin-right: -2px;
 }
 
+
 .article-nav-title {
-    font-size: 0.85em;
+    font-size: 1em;
     line-height: 1.6em;
     margin-top: 0.5em;
 }
@@ -1481,7 +1490,8 @@ a.article-title:hover {
 .article-entry pre,
 .article-entry .highlight {
     background: #272822;
-    margin: 0 -20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     padding: 15px 20px;
     border-style: solid;
     border-color: #ddd;
@@ -1742,7 +1752,7 @@ pre .javascript .function {
     left: 50%;
     width: 200%;
     height: 0;
-    background: #ff6f00;
+    background: lightseagreen;
     z-index: -1;
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
@@ -1907,7 +1917,7 @@ pre .javascript .function {
     padding: 0;
     margin: 0;
     font-size: 0;
-    line-height: 0;
+    line-height: 10;
 }
 
 .main-footer .social-links li {
@@ -1944,7 +1954,7 @@ pre .javascript .function {
     top: 50%;
     left: 50%;
     width: 200%;
-    height: 0%;
+    height: 0;
     background: #ffffff;
     z-index: -1;
     -webkit-transition: all 0.3s;
@@ -1961,7 +1971,7 @@ pre .javascript .function {
 
 .main-footer .social-links li a i:hover,
 .main-footer .social-links li a i:focus {
-    color: #ff6f00;
+    color: darkcyan;
 }
 
 .main-footer .social-links li a i:hover:after,
@@ -1980,7 +1990,9 @@ pre .javascript .function {
 }
 
 .tag_cloud a{
-    font-size: 13px;
+    font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+    font-style: oblique;
+    font-size: 14px;
     color:#fff;
     text-transform: capitalize;
     text-decoration: none;
@@ -1990,7 +2002,7 @@ pre .javascript .function {
     line-height: 21px;
     opacity: 1;
     border-radius: 5px;
-    letter-spacing: 1.2px;
+    letter-spacing: 1px;
 }
 .tag_cloud a:hover{
     color: #fff;
@@ -2010,3 +2022,8 @@ pre .javascript .function {
 .tag-3{
     background-color: #ec971f;
 }
+
+code span{
+    font-size: 15px;
+}
+::selection {background:teal; color:#FCF;}

@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% if title %}
+    {% block title %}{{ title }}{% endblock %}
+{% endif %}
+{% load mod %}
+{% block main %}
+
+    <article class="article">
+        <div class="article-meta">
+            <a href="{% url 'blog:detail' article.en_title %}" class="article-date">
+                <time>{{ article.pub_time | date:'m-d-Y' }}</time>
+            </a>
+
+            <div class="article-category">
+                <a class="article-category-link"
+                   href="{% url 'blog:category' article.category.en_name %}">{{ article.category }}</a>
+            </div>
+            <div class="article-category">
+                <a class="article-category-link">{{ article.view_time }}℃</a>
+            </div>
+        </div>
+        <div class="article-inner">
+
+            <header class="article-header">
+
+                <h1 class="article-title">
+                    {{ article.title }}
+                </h1>
+
+            </header>
+
+            <div class="article-entry">
+
+                {{ article.content_html | safe }}
+
+            </div>
+            <footer class="article-footer">
+
+                <a class="article-share-link" data-share="baidu">Share</a>
+
+
+                <a href="{% url 'blog:detail' article.en_title %}#ds-thread" class="article-comment-link">Comments</a>
+
+                <div class="tag_cloud">
+
+                    {% for tag in article.tag.all %}
+
+                        <a class="tag-{{ forloop.counter0 | mod:4 }}"
+                           href="{% url 'blog:tag' tag.en_name %}">
+                            <li>{{ tag.name }}</li>
+                        </a>
+
+                    {% endfor %}
+                </div>
+
+            </footer>
+        </div>
+    </article>
+
+{% endblock %}
+
+{% block page %}
+
+    <nav id="article-nav">
+        {% if pre_article %}
+            <a href="{% url 'blog:detail' pre_article.en_title %}" id="article-nav-newer" class="article-nav-link-wrap">
+                <strong class="article-nav-caption">The Previous</strong>
+
+                <div class="article-nav-title">
+                    {{ pre_article.title }}
+                </div>
+            </a>
+        {% endif %}
+        {% if next_article %}
+            <a href="{% url 'blog:detail' next_article.en_title %}" id="article-nav-older"
+               class="article-nav-link-wrap">
+                <strong class="article-nav-caption">The Next</strong>
+
+                <div class="article-nav-title">{{ next_article.title }}</div>
+            </a>
+        {% endif %}
+    </nav>
+{% endblock %}
+
+{% include 'include/duoshuo.html' %}
+
