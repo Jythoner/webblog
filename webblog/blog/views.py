@@ -104,7 +104,7 @@ class ArticleDetailView(BaseMixin, DetailView):
     def get(self, request, *args, **kwargs):
         self.en_title = self.kwargs.get('slug',)
         self.article = self.queryset.prefetch_related('tag').get(en_title=self.en_title)
-        self.queryset.update(view_time=F('view_time')+1)
+        Article.objects.filter(en_title=self.en_title).update(view_time=F('view_time') + 1)
         return super(ArticleDetailView, self).get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):

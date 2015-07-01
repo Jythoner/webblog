@@ -954,7 +954,7 @@ a.article-title:hover {
     font-size: 0.85em;
     line-height: 1.6em;
     border-top: 2px solid #ddd;
-    padding-top: 1.6em;
+    padding-top: 15px;
     margin: 0 20px 20px;
 }
 
@@ -1899,7 +1899,7 @@ pre .javascript .function {
 }
 
 .main-footer .copyright span {
-    color: tomato;
+    color: teal;
 }
 
 .main-footer a {
@@ -2023,7 +2023,8 @@ pre .javascript .function {
     background-color: #ec971f;
 }
 
-code span{
+.codehilite pre code span{
     font-size: 15px;
 }
+
 ::selection {background:teal; color:#FCF;}

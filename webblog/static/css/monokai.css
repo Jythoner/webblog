@@ -14,20 +14,20 @@
 .codehilite .gs { font-weight: bold } /* Generic.Strong */
 .codehilite .kc { color: #66d9ef } /* Keyword.Constant */
 .codehilite .kd { color: #66d9ef } /* Keyword.Declaration */
-.codehilite .kn { color: #f92672 } /* Keyword.Namespace */
+.codehilite .kn { color: #66d9ef } /* Keyword.Namespace */
 .codehilite .kp { color: #66d9ef } /* Keyword.Pseudo */
 .codehilite .kr { color: #66d9ef } /* Keyword.Reserved */
 .codehilite .kt { color: #66d9ef } /* Keyword.Type */
 .codehilite .ld { color: #e6db74 } /* Literal.Date */
 .codehilite .m { color: #ae81ff } /* Literal.Number */
-.codehilite .s { color: #e6db74 } /* Literal.String */
+.codehilite .s { color: #fd971f } /* Literal.String */
 .codehilite .na { color: #a6e22e } /* Name.Attribute */
-.codehilite .nb { color: #f8f8f2 } /* Name.Builtin */
-.codehilite .nc { color: #a6e22e } /* Name.Class */
+.codehilite .nb { color: #66d9ef } /* Name.Builtin */
+.codehilite .nc { color: #f92672 } /* Name.Class */
 .codehilite .no { color: #66d9ef } /* Name.Constant */
 .codehilite .nd { color: #a6e22e } /* Name.Decorator */
 .codehilite .ni { color: #f8f8f2 } /* Name.Entity */
-.codehilite .ne { color: #a6e22e } /* Name.Exception */
+.codehilite .ne { color: #f92672} /* Name.Exception */
 .codehilite .nf { color: #a6e22e } /* Name.Function */
 .codehilite .nl { color: #f8f8f2 } /* Name.Label */
 .codehilite .nn { color: #f8f8f2 } /* Name.Namespace */
@@ -35,7 +35,7 @@
 .codehilite .py { color: #f8f8f2 } /* Name.Property */
 .codehilite .nt { color: #f92672 } /* Name.Tag */
 .codehilite .nv { color: #f8f8f2 } /* Name.Variable */
-.codehilite .ow { color: #f92672 } /* Operator.Word */
+.codehilite .ow { color: #66d9ef } /* Operator.Word */
 .codehilite .w { color: #f8f8f2 } /* Text.Whitespace */
 .codehilite .mf { color: #ae81ff } /* Literal.Number.Float */
 .codehilite .mh { color: #ae81ff } /* Literal.Number.Hex */
@@ -52,7 +52,7 @@
 .codehilite .sr { color: #e6db74 } /* Literal.String.Regex */
 .codehilite .s1 { color: #e6db74 } /* Literal.String.Single */
 .codehilite .ss { color: #e6db74 } /* Literal.String.Symbol */
-.codehilite .bp { color: #f8f8f2 } /* Name.Builtin.Pseudo */
+.codehilite .bp { color: #fd971f } /* Name.Builtin.Pseudo */
 .codehilite .vc { color: #f8f8f2 } /* Name.Variable.Class */
 .codehilite .vg { color: #f8f8f2 } /* Name.Variable.Global */
 .codehilite .vi { color: #f8f8f2 } /* Name.Variable.Instance */
