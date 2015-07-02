@@ -1489,7 +1489,7 @@ a.article-title:hover {
 
 .article-entry pre,
 .article-entry .highlight {
-    background: #272822;
+    background: #002B36;
     margin-top: 10px;
     margin-bottom: 10px;
     padding: 15px 20px;
@@ -1507,10 +1507,7 @@ a.article-title:hover {
     font-size: 0.85em;
 }
 
-.article-entry pre,
-.article-entry code {
-    font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
-}
+
 
 .article-entry code {
     background: #f0f0f0;
@@ -1520,6 +1517,12 @@ a.article-title:hover {
     border: 1px solid #dcdcdc;
     -webkit-border-radius: 3px;
     border-radius: 3px;
+}
+
+.article-entry pre,
+.article-entry code {
+    font-family: Consolas, monospace;
+    font-size: 1.05em;
 }
 
 .article-entry pre code {
@@ -2023,11 +2026,40 @@ pre .javascript .function {
     background-color: #ec971f;
 }
 
-.codehilite pre code span{
-    font-size: 15px;
-}
-
 .footer-bug{
     padding-top: 1.2em;
 }
+span.a{
+    z-index: 999;
+    position: absolute;
+    width: 20%;
+    height: 5px;
+    bottom: 0;
+}
+
+span.a.a1{
+    left: 0;
+    background-color: #3b5998;
+}
+
+span.a.a2{
+    left: 20%;
+    background-color: #45db34;
+}
+
+span.a.a3{
+    left: 40%;
+    background-color: #f6e148;
+}
+
+span.a.a4{
+    right: 20%;
+    background-color: #fb820f;
+}
+
+span.a.a5{
+    right: 0;
+    background-color: #f71215;
+}
+
 ::selection {background:teal; color:#FCF;}

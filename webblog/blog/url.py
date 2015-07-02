@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from .views import IndexView, ArticleDetailView, CategoryView, TagView, SearchView
+from .views import IndexView,CategoryView, TagView, SearchView, ArticleDetailView, ArchiveView
 
 
 urlpatterns = [
@@ -9,5 +9,6 @@ urlpatterns = [
     url(r'^tag/(?P<tag>\w+)/$', TagView.as_view(), name='tag'),
     url(r'^search/$', SearchView.as_view()),
     url(r'^detail/(?P<slug>\w+)/$', ArticleDetailView.as_view(), name='detail'),
+    url(r'^archive/$', ArchiveView.as_view(), name='archive'),
 
 ]

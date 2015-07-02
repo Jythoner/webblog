@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block main %}
+
+    <div class="article">
+        {% for article in archive_list %}
+            <li class="archive-article-date">{{ article.pub_time }}
+                <a class="article-title" href="{% url 'blog:detail' article.en_title %}">{{ article.title }}</a></li>
+        {% endfor %}
+
+    </div>
+{% endblock %}

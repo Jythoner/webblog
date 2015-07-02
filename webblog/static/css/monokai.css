@@ -20,15 +20,15 @@
 .codehilite .kt { color: #66d9ef } /* Keyword.Type */
 .codehilite .ld { color: #e6db74 } /* Literal.Date */
 .codehilite .m { color: #ae81ff } /* Literal.Number */
-.codehilite .s { color: #fd971f } /* Literal.String */
+.codehilite .s { color: #e6db74 } /* Literal.String */
 .codehilite .na { color: #a6e22e } /* Name.Attribute */
-.codehilite .nb { color: #66d9ef } /* Name.Builtin */
+.codehilite .nb { color: #f8f8f2 } /* Name.Builtin */
 .codehilite .nc { color: #f92672 } /* Name.Class */
 .codehilite .no { color: #66d9ef } /* Name.Constant */
 .codehilite .nd { color: #a6e22e } /* Name.Decorator */
 .codehilite .ni { color: #f8f8f2 } /* Name.Entity */
-.codehilite .ne { color: #f92672} /* Name.Exception */
-.codehilite .nf { color: #a6e22e } /* Name.Function */
+.codehilite .ne { color: #f8f8f2} /* Name.Exception */
+.codehilite .nf { color: #f92672 } /* Name.Function */
 .codehilite .nl { color: #f8f8f2 } /* Name.Label */
 .codehilite .nn { color: #f8f8f2 } /* Name.Namespace */
 .codehilite .nx { color: #a6e22e } /* Name.Other */
@@ -52,7 +52,7 @@
 .codehilite .sr { color: #e6db74 } /* Literal.String.Regex */
 .codehilite .s1 { color: #e6db74 } /* Literal.String.Single */
 .codehilite .ss { color: #e6db74 } /* Literal.String.Symbol */
-.codehilite .bp { color: #fd971f } /* Name.Builtin.Pseudo */
+.codehilite .bp { color: #ae81ff } /* Name.Builtin.Pseudo */
 .codehilite .vc { color: #f8f8f2 } /* Name.Variable.Class */
 .codehilite .vg { color: #f8f8f2 } /* Name.Variable.Global */
 .codehilite .vi { color: #f8f8f2 } /* Name.Variable.Instance */

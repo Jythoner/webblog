@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 from django.db.models import Q, F
 from django.http import Http404
-from django.views.generic import ListView, DetailView, ArchiveIndexView
+from django.views.generic import ListView, DetailView, ArchiveIndexView, YearArchiveView
 from .models import Category, Tag, Article
 import logging
 logger = logging.getLogger(__name__)
@@ -125,4 +125,12 @@ class ArticleDetailView(BaseMixin, DetailView):
         context['next_article']= next_article
         context['title'] = self.en_title + ' |'
         return context
+
+class ArchiveView(BaseMixin, ArchiveIndexView):
+
+    model = Article
+    context_object_name = 'archive_list'
+    template_name = 'archive.html'
+    date_field = 'pub_time'
+
 
