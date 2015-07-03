@@ -224,6 +224,9 @@ body {
     text-shadow: 0 1px #fff;
     font-weight: bold;
 }
+.archive-year:hover{
+    text-decoration: none;
+}
 
 .article-inner,
 .archive-article-inner {
@@ -1399,6 +1402,7 @@ a.article-title:hover {
 }
 
 .archive-article-title:hover {
+    text-decoration: none;
     color: #e32d40;
 }
 
@@ -1409,13 +1413,15 @@ a.article-title:hover {
 .archive-article-date {
     color: #999;
     text-decoration: none;
-    font-size: 0.85em;
+    font-size: 0.95em;
+    font-weight: bold;
     line-height: 1em;
     margin-bottom: 0.5em;
     display: block;
 }
 
-.article-date:hover {
+.article-date:hover,
+.archive-article-date:hover{
     text-decoration: none;
 }
 

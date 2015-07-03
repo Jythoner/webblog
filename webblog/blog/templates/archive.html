@@ -1,11 +1,32 @@
 {% extends 'base.html' %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+
 {% block main %}
 
-    <div class="article">
-        {% for article in archive_list %}
-            <li class="archive-article-date">{{ article.pub_time }}
-                <a class="article-title" href="{% url 'blog:detail' article.en_title %}">{{ article.title }}</a></li>
-        {% endfor %}
+    <section class="archives-wrap">
+        <div class="archive-year-wrap">
+            <a class="archive-year">2015</a>
+        </div>
+        <div class="archives">
+            {% for article in archive_list %}
+                <article class="archive-article">
+                    <div class="archive-article-inner">
+                        <header class="archive-article-header">
+                            <a class="archive-article-date">
+                                <time>{{ article.pub_time | date:'m-d' }}</time>
+                            </a>
 
-    </div>
+                            <h1>
+                                <a class="archive-article-title"
+                                   href="{% url 'blog:detail' article.en_title %}">{{ article.title }}</a>
+                            </h1>
+
+                        </header>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    </section>
 {% endblock %}

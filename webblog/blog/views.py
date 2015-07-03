@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 from django.db.models import Q, F
 from django.http import Http404
-from django.views.generic import ListView, DetailView, ArchiveIndexView, YearArchiveView
+from django.views.generic import ListView, DetailView, ArchiveIndexView, DayArchiveView
 from .models import Category, Tag, Article
 import logging
 logger = logging.getLogger(__name__)
@@ -133,4 +133,17 @@ class ArchiveView(BaseMixin, ArchiveIndexView):
     template_name = 'archive.html'
     date_field = 'pub_time'
 
+    def get_context_data(self, **kwargs):
+        context = super(ArchiveView, self).get_context_data(**kwargs)
+        context['title'] = 'Archive' + ' |'
+        return context
 
+class ArticleDayView(BaseMixin, DayArchiveView):
+
+    model = Article
+    year_format = '%Y'
+    month_format = '%m'
+    day_format = '%d'
+    context_object_name = 'archive_day_list'
+    template_name = 'archive_day.html'
+    date_field = 'pub_time'

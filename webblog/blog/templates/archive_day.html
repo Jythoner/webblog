@@ -1,0 +1,6 @@
+
+<ul>
+    {% for article in archive_day_list %}
+        <li>{{ article.pub_time | date:"m-d-Y" }}: {{ article.title }}</li>
+    {% endfor %}
+</ul>
