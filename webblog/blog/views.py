@@ -1,14 +1,14 @@
 # -*- coding:utf-8 -*-
 from django.db.models import Q, F
 from django.http import Http404
-from django.views.generic import ListView, DetailView, ArchiveIndexView, DayArchiveView
+from django.views.generic import ListView, DetailView, ArchiveIndexView, DayArchiveView, TemplateView
 from .models import Category, Tag, Article
 import logging
 logger = logging.getLogger(__name__)
 
 
 class BaseMixin(object):
-
+    '''BaseMixin是最基本的视图类，所有类都通过继承BaseMixin类来加载生成的侧边栏数据'''
     def get_context_data(self, **kwargs):
         context = super(BaseMixin, self).get_context_data(**kwargs)
         try:
@@ -20,9 +20,8 @@ class BaseMixin(object):
 
         return context
 
-
 class IndexView(BaseMixin, ListView):
-
+    '''IndexView就是所谓的主页，通过继承BaseMixin和ListView通用视图来加载侧边栏数据和生成文章列表'''
     context_object_name = 'article_list'
     template_name = 'index.html'
     paginate_by = 10
@@ -33,7 +32,7 @@ class IndexView(BaseMixin, ListView):
 
 
 class CategoryView(BaseMixin, ListView):
-
+    '''CategoryView是查询属于该分类下的文章，加载侧边栏数据，生成属于该分类的文章列表'''
     context_object_name = 'article_list'
     template_name = 'category.html'
     paginate_by = 10
@@ -55,7 +54,7 @@ class CategoryView(BaseMixin, ListView):
 
 
 class TagView(BaseMixin, ListView):
-
+    '''TagView是查询属于该标签下的文章，加载侧边栏数据，生成属于该标签的文章列表'''
     context_object_name = 'article_list'
     template_name = 'tag.html'
     paginate_by = 10
@@ -72,7 +71,7 @@ class TagView(BaseMixin, ListView):
 
 
 class SearchView(BaseMixin, ListView):
-
+    '''SearchView是搜索视图，通过前端获取来的关键字来对文章的标题，内容和摘要进行查找，返回匹配到的文章列表，并加载侧边栏数据'''
     context_object_name = 'article_list'
     template_name = 'search.html'
     paginate_by = 10
@@ -95,7 +94,7 @@ class SearchView(BaseMixin, ListView):
 
 
 class ArticleDetailView(BaseMixin, DetailView):
-
+    '''ArticleDetailView是查看详细文章的视图，只能返回一个对象，加载侧边栏数据'''
     queryset = Article.objects.filter(status=0)
     context_object_name = 'article'
     template_name = 'detail.html'
@@ -122,12 +121,13 @@ class ArticleDetailView(BaseMixin, DetailView):
             next_article = None
 
         context['pre_article'] = pre_article
-        context['next_article']= next_article
+        context['next_article'] = next_article
         context['title'] = self.en_title + ' |'
         return context
 
-class ArchiveView(BaseMixin, ArchiveIndexView):
 
+class ArchiveView(BaseMixin, ArchiveIndexView):
+    '''ArchiveView是所有文章的归档总结，加载侧边栏数据'''
     model = Article
     context_object_name = 'archive_list'
     template_name = 'archive.html'
@@ -138,12 +138,9 @@ class ArchiveView(BaseMixin, ArchiveIndexView):
         context['title'] = 'Archive' + ' |'
         return context
 
-class ArticleDayView(BaseMixin, DayArchiveView):
 
-    model = Article
-    year_format = '%Y'
-    month_format = '%m'
-    day_format = '%d'
-    context_object_name = 'archive_day_list'
-    template_name = 'archive_day.html'
-    date_field = 'pub_time'
+class ContactView(BaseMixin, TemplateView):
+    template_name = 'contact.html'
+
+
+

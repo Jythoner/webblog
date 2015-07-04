@@ -9,7 +9,7 @@
             {% for post in post_list %}
                 <article class="article">
                     <div class="article-meta">
-                        <a href="{% url 'blog:detail' post.en_title %}" class="article-date">
+                        <a class="article-date">
                             <time>{{ post.pub_time | date:'m-d-Y' }}</time>
                         </a>
 

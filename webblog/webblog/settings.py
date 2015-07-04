@@ -96,6 +96,35 @@ DATABASES = {
         'PORT': '3306',
         }
 }
+#cache system
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+        'options': {
+            'MAX_ENTRIES': 1024,
+        }
+    },
+    'memcache': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+        'options': {
+            'MAX_ENTRIES': 1024,
+        }
+    },
+    "redis": {
+        "BACKEND": "redis_cache.cache.RedisCache",
+        "LOCATION": "127.0.0.1:6379",
+        "OPTIONS": {
+            'db': 1,
+            'PASSWORD': 'huyiyang',
+            "PICKLE_VERSION": -1,   # default
+            "PARSER_CLASS": "redis.connection.HiredisParser",
+            "CLIENT_CLASS": "redis_cache.client.DefaultClient",
+
+            }
+        },
+}
 
 
 # Internationalization
