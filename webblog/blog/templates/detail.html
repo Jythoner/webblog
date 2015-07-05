@@ -2,6 +2,9 @@
 {% if title %}
     {% block title %}{{ title }}{% endblock %}
 {% endif %}
+{% block css %}
+    <link type="text/css" rel="stylesheet" href="/static/css/monokai.css">
+{% endblock %}
 {% load mod %}
 {% block main %}
 

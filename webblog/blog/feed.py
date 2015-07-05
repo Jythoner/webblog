@@ -11,6 +11,7 @@ class ExtendedRSSFeed(Rss201rev2Feed):
     """
     Create a type of RSS feed that has content:encoded elements.
     """
+
     def root_attributes(self):
         attrs = super(ExtendedRSSFeed, self).root_attributes()
         attrs['xmlns:content'] = 'http://purl.org/rss/1.0/modules/content/'

@@ -8,7 +8,7 @@
         {% ifequal i page_obj.number %}
             <span class="page-number current">{{ page_obj.number }}</span>
         {% else %}
-            <a class="page-number" href="?page={{ i }}">{i}</a>
+            <a class="page-number" href="?page={{ i }}">{{ i }}</a>
         {% endifequal %}
     {% endfor %}
     {% if page_obj.has_next %}

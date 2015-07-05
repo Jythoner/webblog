@@ -10,8 +10,8 @@ STATUS = {
     2: u'草稿',
 }
 
-class Category(models.Model):
 
+class Category(models.Model):
     name = models.CharField(max_length=30, verbose_name=u'名称')
     en_name = models.CharField(max_length=40, verbose_name=u'英文名称')
     des = models.CharField(max_length=100, verbose_name=u'分类描述')
@@ -28,7 +28,6 @@ class Category(models.Model):
 
 
 class Tag(models.Model):
-
     name = models.CharField(max_length=30, verbose_name=u'名称')
     en_name = models.CharField(max_length=40, verbose_name=u'英文名称')
     status = models.IntegerField(default=0, choices=STATUS.items(), verbose_name=u'状态')
@@ -44,7 +43,6 @@ class Tag(models.Model):
 
 
 class Article(models.Model):
-
     author = models.ForeignKey(User, verbose_name=u'作者')
     title = models.CharField(max_length=40, verbose_name=u'标题')
     en_title = models.CharField(max_length=40, verbose_name=u'英文标题')
@@ -72,6 +70,3 @@ class Article(models.Model):
     class Meta:
         verbose_name_plural = verbose_name = u'文章管理'
         ordering = ['rank', '-create_time', ]
-
-
-

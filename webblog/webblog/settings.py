@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 """
 Django settings for webblog project.
 
@@ -37,8 +38,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'debug_toolbar',
     'blog',
+    'debug_toolbar',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -50,7 +51,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware'
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 ROOT_URLCONF = 'webblog.urls'
@@ -96,6 +97,75 @@ DATABASES = {
         'PORT': '3306',
         }
 }
+
+#Logging
+
+if DEBUG:
+    LOG_FILE = 'C:/django.log'
+else:
+    LOG_FILE = 'D:/all.log'
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+    'formatters': {
+        'simple': {
+            'format': '[%(levelname)s] %(module)s : %(message)s'
+        },
+        'verbose': {
+            'format': '[%(asctime)s] [%(levelname)s] %(module)s : %(message)s'
+        }
+    },
+
+    'handlers': {
+        'null': {
+            'level': 'DEBUG',
+            'class': 'django.utils.log.NullHandler',
+        },
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        },
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'formatter': 'verbose',
+            'filename': LOG_FILE,
+            'mode': 'a',
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'filters': ['require_debug_false']
+        }
+    },
+    'loggers': {
+        '': {
+            'handlers': ['file', 'console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'django': {
+            'handlers': ['file', 'console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['mail_admins', 'console'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    }
+}
+
 #cache system
 CACHES = {
     'default': {
@@ -157,3 +227,10 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,  'templates'),
 )
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.163.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER='thetwenty@163.com'
+EMAIL_HOST_PASSWORD=''
+EMAIL_SUBJECT_PREFIX = u'河图洛书'
+EMAIL_USE_TLS = True

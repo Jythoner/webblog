@@ -1,16 +1,19 @@
 # -*- coding:utf-8 -*-
 import datetime
+
 from django.contrib import admin
 from django.utils import timezone
+
 from .models import Category, Tag, Article
+
 # Register your models here.
 
-class CategoryAdmin(admin.ModelAdmin):
 
+class CategoryAdmin(admin.ModelAdmin):
     fieldsets = [
         (u'分类信息', {'fields': ['name', 'en_name', 'des', ]}),
         (u'状态信息', {'fields': ['status', 'rank', ]}),
-        (u'创建时间', {'fields': ['create_time' ]}),
+        (u'创建时间', {'fields': ['create_time']}),
     ]
 
     readonly_fields = ('create_time', )
@@ -21,11 +24,10 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class TagAdmin(admin.ModelAdmin):
-
     fieldsets = [
         (u'标签信息', {'fields': ['name', 'en_name', ]}),
         (u'状态信息', {'fields': ['status', 'rank', ]}),
-        (u'创建时间', {'fields': ['create_time' ]}),
+        (u'创建时间', {'fields': ['create_time']}),
     ]
     readonly_fields = ('create_time', )
     list_display = ['name', 'status', 'rank', 'create_time', ]
@@ -35,7 +37,6 @@ class TagAdmin(admin.ModelAdmin):
 
 
 class ArticleAdmin(admin.ModelAdmin):
-
     fieldsets = [
         (u'文章信息', {'fields': ['author', 'title', 'en_title', 'summary', 'category', 'tag', ]}),
         (u'文章内容', {'fields': ['content', ]}),
