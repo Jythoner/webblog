@@ -2,8 +2,9 @@
 import logging
 
 from django.core.mail import send_mail, BadHeaderError
-from django.db.models import Q, F
+from django.db.models import Q
 from django.http import Http404, HttpResponse
+from django.utils import timezone
 from django.views.generic import ListView, DetailView, ArchiveIndexView, FormView
 
 from blog.form import ContactForm
@@ -109,16 +110,17 @@ class ArticleDetailView(BaseMixin, DetailView):
     template_name = 'detail.html'
     slug_field = 'en_title'
 
-    def get(self, request, *args, **kwargs):
-        self.en_title = self.kwargs.get('slug', )
-        self.article = self.queryset.prefetch_related('tag').get(en_title=self.en_title)
-        Article.objects.filter(en_title=self.en_title).update(view_time=F('view_time') + 1)
-        return super(ArticleDetailView, self).get(request, *args, **kwargs)
+    def get_object(self, queryset=None):
+        self.object = super(ArticleDetailView, self).get_object()
+        self.object.view_time = self.object.view_time + 1
+        self.object.last_accessed = timezone.now()
+        self.object.save()
+        return self.object
 
     def get_context_data(self, **kwargs):
         context = super(ArticleDetailView, self).get_context_data(**kwargs)
-        pre_article_id = self.article.id + 1
-        next_article_id = self.article.id - 1
+        pre_article_id = self.object.id + 1
+        next_article_id = self.object.id - 1
         try:
             pre_article = Article.objects.get(id=pre_article_id)
         except Article.DoesNotExist:
@@ -131,7 +133,7 @@ class ArticleDetailView(BaseMixin, DetailView):
 
         context['pre_article'] = pre_article
         context['next_article'] = next_article
-        context['title'] = self.en_title + ' |'
+        context['title'] = self.object.en_title + ' |'
         return context
 
 
@@ -161,7 +163,7 @@ class ContactView(BaseMixin, FormView):
         user_message = form.cleaned_data['message']
         send_subject = u'河图洛书'
         send_message = u'- - 您的建议已经收到，Thankyou - -'
-        user_message = user_message + '\n' + 'username: %s \nfrom email: %s' % (user_name,user_email)
+        user_message = user_message + '\n' + 'username: %s \nfrom email: %s' % (user_name, user_email)
         try:
             send_mail(send_subject, send_message, 'thetwenty@163.com', [user_email])
             send_mail(user_subject, user_message, 'thetwenty@163.com', ['thetwenty@163.com'])

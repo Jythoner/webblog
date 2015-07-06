@@ -52,6 +52,7 @@ class Article(models.Model):
     content = models.TextField(verbose_name=u'内容')
     content_html = models.TextField(editable=False, blank=True, null=True)
     view_time = models.IntegerField(editable=False, default=0, verbose_name=u'访问次数')
+    last_accessed = models.DateTimeField(editable=False, null=True, verbose_name=u'最近访问时间')
     status = models.IntegerField(default=0, choices=STATUS.items(), verbose_name=u'状态')
     rank = models.IntegerField(default=0, verbose_name=u'排序')
 
