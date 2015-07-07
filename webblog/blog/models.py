@@ -4,18 +4,23 @@ from django.db import models
 import markdown2
 
 
-STATUS = {
-    0: u'正常',
-    1: u'删除',
-    2: u'草稿',
-}
+STATUS = (
+    (0, u'正常'),
+    (1, u'删除'),
+    (2, u'草稿'),
+)
+
+LIFE = (
+    (0, u'IT技术'),
+    (1, u'生活随笔'),
+)
 
 
 class Category(models.Model):
     name = models.CharField(max_length=30, verbose_name=u'名称')
     en_name = models.CharField(max_length=40, verbose_name=u'英文名称')
     des = models.CharField(max_length=100, verbose_name=u'分类描述')
-    status = models.IntegerField(default=0, choices=STATUS.items(), verbose_name=u'状态')
+    status = models.IntegerField(default=0, choices=STATUS, verbose_name=u'状态')
     rank = models.IntegerField(default=0, verbose_name=u'排序')
     create_time = models.DateTimeField(auto_now_add=True, verbose_name=u'创建时间')
 
@@ -28,9 +33,9 @@ class Category(models.Model):
 
 
 class Tag(models.Model):
-    name = models.CharField(max_length=30, verbose_name=u'名称')
+    name = models.CharField(max_length=50, verbose_name=u'名称')
     en_name = models.CharField(max_length=40, verbose_name=u'英文名称')
-    status = models.IntegerField(default=0, choices=STATUS.items(), verbose_name=u'状态')
+    status = models.IntegerField(default=0, choices=STATUS, verbose_name=u'状态')
     rank = models.IntegerField(default=0, verbose_name=u'排序')
     create_time = models.DateTimeField(auto_now_add=True, verbose_name=u'创建时间')
 
@@ -53,7 +58,8 @@ class Article(models.Model):
     content_html = models.TextField(editable=False, blank=True, null=True)
     view_time = models.IntegerField(editable=False, default=0, verbose_name=u'访问次数')
     last_accessed = models.DateTimeField(editable=False, null=True, verbose_name=u'最近访问时间')
-    status = models.IntegerField(default=0, choices=STATUS.items(), verbose_name=u'状态')
+    IT_AS_LIFE = models.IntegerField(default=0, choices=LIFE, verbose_name=u'技术or随笔')
+    status = models.IntegerField(default=0, choices=STATUS, verbose_name=u'状态')
     rank = models.IntegerField(default=0, verbose_name=u'排序')
 
     pub_time = models.DateTimeField(default=False, verbose_name=u'发布时间')

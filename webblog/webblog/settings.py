@@ -166,37 +166,6 @@ LOGGING = {
     }
 }
 
-#cache system
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'LOCATION': 'unique-snowflake',
-        'options': {
-            'MAX_ENTRIES': 1024,
-        }
-    },
-    'memcache': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': '127.0.0.1:11211',
-        'options': {
-            'MAX_ENTRIES': 1024,
-        }
-    },
-    "redis": {
-        "BACKEND": "redis_cache.cache.RedisCache",
-        "LOCATION": "127.0.0.1:6379",
-        "OPTIONS": {
-            'db': 1,
-            'PASSWORD': 'huyiyang',
-            "PICKLE_VERSION": -1,   # default
-            "PARSER_CLASS": "redis.connection.HiredisParser",
-            "CLIENT_CLASS": "redis_cache.client.DefaultClient",
-
-            }
-        },
-}
-
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
@@ -231,6 +200,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.163.com'
 EMAIL_PORT = 25
 EMAIL_HOST_USER='thetwenty@163.com'
-EMAIL_HOST_PASSWORD=''
+EMAIL_HOST_PASSWORD='huyiyang6701812'
 EMAIL_SUBJECT_PREFIX = u'河图洛书'
 EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

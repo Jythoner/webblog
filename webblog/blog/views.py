@@ -9,7 +9,7 @@ from django.views.generic import ListView, DetailView, ArchiveIndexView, FormVie
 
 from blog.form import ContactForm
 from .models import Category, Tag, Article
-
+from webblog.settings import DEFAULT_FROM_EMAIL
 logger = logging.getLogger(__name__)
 
 
@@ -36,7 +36,17 @@ class IndexView(BaseMixin, ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        article_list = Article.objects.select_related('category').filter(status=0)
+        article_list = Article.objects.select_related('category').filter(status=0, IT_AS_LIFE=0)
+        return article_list
+
+class LifeView(BaseMixin, ListView):
+    """生活随笔栏目"""
+    context_object_name = 'article_list'
+    template_name = 'index.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        article_list = Article.objects.select_related('category').filter(status=0, IT_AS_LIFE=1)
         return article_list
 
 
@@ -112,9 +122,9 @@ class ArticleDetailView(BaseMixin, DetailView):
 
     def get_object(self, queryset=None):
         self.object = super(ArticleDetailView, self).get_object()
-        self.object.view_time = self.object.view_time + 1
+        self.object.view_time += 1
         self.object.last_accessed = timezone.now()
-        self.object.save()
+        self.object.save(update_fields=['view_time', 'last_accessed'])
         return self.object
 
     def get_context_data(self, **kwargs):
@@ -150,7 +160,7 @@ class ArchiveView(BaseMixin, ArchiveIndexView):
         return context
 
 
-class ContactView(BaseMixin, FormView):
+class ContactView(FormView):
     """ContactView是一个发送反馈信息的表单视图"""
     template_name = 'contact.html'
     form_class = ContactForm
@@ -162,11 +172,11 @@ class ContactView(BaseMixin, FormView):
         user_email = form.cleaned_data['email']
         user_message = form.cleaned_data['message']
         send_subject = u'河图洛书'
-        send_message = u'- - 您的建议已经收到，Thankyou - -'
+        send_message = u'- - 您的建议已经收到，Thankyou very very much - -'
         user_message = user_message + '\n' + 'username: %s \nfrom email: %s' % (user_name, user_email)
         try:
-            send_mail(send_subject, send_message, 'thetwenty@163.com', [user_email])
-            send_mail(user_subject, user_message, 'thetwenty@163.com', ['thetwenty@163.com'])
+            send_mail(send_subject, send_message, DEFAULT_FROM_EMAIL, [user_email])
+            send_mail(user_subject, user_message, DEFAULT_FROM_EMAIL, [DEFAULT_FROM_EMAIL])
         except BadHeaderError:
             return HttpResponse('Invaild header fount.')
 

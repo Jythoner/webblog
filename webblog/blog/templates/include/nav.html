@@ -22,6 +22,7 @@
 
                 <a class="main-nav-link" href="/" title="Home">Home</a>
                 <a class="main-nav-link" href="{% url 'blog:archive' %}" title="Archives">Archives</a>
+                <a class="main-nav-link" href="{% url 'blog:life' %}" title="Life">Life</a>
                 <a class="main-nav-link" href="{% url 'blog:contact' %}" title="Contact">Contact</a>
 
             </nav>
@@ -30,7 +31,7 @@
                 <a class="fa fa-spinner fa-spin nav-icon" title="To be continue"
                    style=" color:tomato;opacity: 1; bottom:-4px;"></a>
 
-                <a href="/contact">
+                <a href="/contact/">
                     <i class="fa fa-envelope-o nav-icon" title="Email" style="font-style: italic"></i>
                 </a>
                 <a class="fa fa-rss nav-icon" title="rss" href="/rss"></a>
@@ -38,7 +39,7 @@
                 <a id="nav-search-btn" class="fa fa-search nav-icon" title="Search"></a>
             </nav>
             <div id="search-form-wrap">
-                <form action="/search" method="get" accept-charset="utf-8"
+                <form action="/search/" method="get" accept-charset="utf-8"
                       class="search-form">
                     <input type="search" name="s" maxlength="20" class="search-form-input"
                            placeholder="Search">
