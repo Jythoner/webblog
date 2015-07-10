@@ -1,7 +1,7 @@
 from django.conf.urls import include, url, patterns
 from django.contrib import admin
 import settings
-
+import datetime
 urlpatterns = [
     # Examples:
     # url(r'^$', 'webblog.views.home', name='home'),
