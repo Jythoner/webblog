@@ -13,6 +13,16 @@ from webblog.settings import DEFAULT_FROM_EMAIL
 logger = logging.getLogger(__name__)
 
 
+fruit = {
+    0: 'Tomato',
+    1: 'Apple',
+    2: 'Banana',
+    3: 'Orange',
+    4: 'Mango',
+    5: 'Cherry',
+    6: 'Lemon',
+}
+
 class BaseMixin(object):
     """BaseMixin是最基本的视图类，所有类都通过继承BaseMixin类来加载生成的侧边栏数据"""
 
@@ -23,6 +33,8 @@ class BaseMixin(object):
                 '-create_time')[:10]
             context['tag_cloud_list'] = Tag.objects.values('name', 'en_name').filter(status=0)
             context['category_list'] = Category.objects.prefetch_related('article_set').filter(status=0)
+            weekdays = timezone.now().weekday()
+            context['fruit'] = fruit[weekdays]
         except Exception as e:
             logger.error(u'[BaseMixin]加载出错')
 
