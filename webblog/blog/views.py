@@ -1,4 +1,5 @@
 # -*- coding:utf-8 -*-
+from gc import get_objects
 import logging
 
 from django.core.mail import send_mail, BadHeaderError
@@ -8,7 +9,7 @@ from django.utils import timezone
 from django.views.generic import ListView, DetailView, ArchiveIndexView, FormView
 
 from blog.form import ContactForm
-from .models import Category, Tag, Article
+from .models import Category, Tag, Article, Book
 from webblog.settings import DEFAULT_FROM_EMAIL
 logger = logging.getLogger(__name__)
 
@@ -60,6 +61,29 @@ class LifeView(BaseMixin, ListView):
     def get_queryset(self):
         article_list = Article.objects.select_related('category').filter(status=0, IT_AS_LIFE=1)
         return article_list
+
+
+class BookView(BaseMixin, ListView):
+    queryset = Book.objects.filter(is_recommend=0)
+    context_object_name = 'book_list'
+    template_name = 'book.html'
+    paginate_by = 15
+
+
+class BookDetailView(BaseMixin, DetailView):
+    queryset = Book.objects.filter(is_recommend=0)
+    context_object_name = 'article'
+    template_name = 'book_detail.html'
+    slug_field = 'en_title'
+
+    def get_object(self, queryset=None):
+        self.object = super(BookDetailView, self).get_object()
+        return self.object
+
+    def get_context_data(self, **kwargs):
+        context = super(BookDetailView, self).get_context_data(**kwargs)
+        context['title'] = self.object.title + ' |'
+        return context
 
 
 class CategoryView(BaseMixin, ListView):

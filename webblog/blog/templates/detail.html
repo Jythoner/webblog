@@ -1,7 +1,5 @@
 {% extends 'base.html' %}
-{% if title %}
-    {% block title %}{{ title }}{% endblock %}
-{% endif %}
+{% block title %}{{ title }}{% endblock %}
 {% block css %}
     <link type="text/css" rel="stylesheet" href="/static/css/monokai.css">
 {% endblock %}

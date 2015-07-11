@@ -2,7 +2,8 @@
 from django.contrib.auth.models import User
 from django.db import models
 import markdown2
-
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill
 
 STATUS = (
     (0, u'正常'),
@@ -13,6 +14,11 @@ STATUS = (
 LIFE = (
     (0, u'IT技术'),
     (1, u'生活随笔'),
+)
+
+Recommend = (
+    (0, u'推荐'),
+    (1, u'不推荐'),
 )
 
 
@@ -77,3 +83,33 @@ class Article(models.Model):
     class Meta:
         verbose_name_plural = verbose_name = u'文章管理'
         ordering = ['rank', '-create_time', ]
+
+
+class Book(models.Model):
+    title = models.CharField(max_length=20, verbose_name=u'书名')
+    en_title = models.CharField(max_length=30, null=True, verbose_name=u'英文标记')
+    summary = models.TextField(max_length=150, verbose_name=u'描述')
+    content = models.TextField(verbose_name=u'图书出版信息')
+    image = models.ImageField(upload_to='photos', verbose_name=u'原图')
+    image_140x180 = ImageSpecField(
+        source='image', processors=[ResizeToFill(140, 180)],
+        format='JPEG', options={'quality': 95})
+    image_300x360 = ImageSpecField(
+        source='image', processors=[ResizeToFill(300, 360)],
+        format='JPEG', options={'quality': 95})
+
+    rank = models.IntegerField(default=0, verbose_name=u'排序')
+    is_recommend = models.BooleanField(default=0, choices=Recommend, verbose_name=u'是否推荐')
+
+    create_time = models.DateTimeField(auto_now_add=True, verbose_name=u'创建时间')
+    update_time = models.DateTimeField(auto_now=True, verbose_name=u'更新时间')
+
+    def __unicode__(self):
+        return self.title
+
+    class Meta:
+        ordering = ['rank']
+        verbose_name_plural = verbose_name = u'图书推荐'
+
+
+

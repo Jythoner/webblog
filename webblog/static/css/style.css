@@ -2068,4 +2068,26 @@ span.a.a5{
     background-color: #f71215;
 }
 
+.row {
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+.row > .col-sm-8 > small {
+    font-size: 16px;
+    color: teal;
+    font-weight: bold;
+}
+.row > .col-sm-8 > p {
+    font-size: 15px;
+    letter-spacing: 1px;
+    color: #707070;
+}
+
+.row > .col-sm-6 > p {
+     font-size: 15px;
+    letter-spacing: 1px;
+    color: #707070;
+    padding-left: 20px;
+}
+
 ::selection {background:teal; color:#FCF;}

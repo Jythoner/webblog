@@ -25,7 +25,7 @@ SECRET_KEY = 'j+wkx63#1lf7&@6%yln&fkt81#ixbb)msd3f-y2^1fqpiqb!ma'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'blog',
     'debug_toolbar',
+    'imagekit',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -95,16 +96,15 @@ DATABASES = {
         'PASSWORD': DB_PWD,
         'HOST': '127.0.0.1',
         'PORT': '3306',
-        }
+    }
 }
 
-#Logging
+# Logging
 
 if DEBUG:
     LOG_FILE = 'C:/django.log'
 else:
     LOG_FILE = 'D:/all.log'
-
 
 LOGGING = {
     'version': 1,
@@ -185,22 +185,25 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'image')
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-# STATIC_ROOT =  os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR,  'templates'),
+    os.path.join(BASE_DIR, 'templates'),
 )
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.163.com'
 EMAIL_PORT = 25
-EMAIL_HOST_USER='thetwenty@163.com'
-EMAIL_HOST_PASSWORD=''
+EMAIL_HOST_USER = 'thetwenty@163.com'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_SUBJECT_PREFIX = u'河图洛书'
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

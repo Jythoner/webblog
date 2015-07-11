@@ -4,7 +4,7 @@ import datetime
 from django.contrib import admin
 from django.utils import timezone
 
-from .models import Category, Tag, Article
+from .models import Category, Tag, Article, Book
 
 # Register your models here.
 
@@ -60,6 +60,13 @@ class ArticleAdmin(admin.ModelAdmin):
     was_published_recently.short_description = '最近发布?'
 
 
+class BookAdmin(admin.ModelAdmin):
+    fields = ('title', 'en_title', 'summary', 'content', 'is_recommend', 'image', 'rank')
+    list_display = ['title', 'is_recommend', 'rank']
+    search_fields = ('title', )
+
+
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Tag, TagAdmin)
 admin.site.register(Article, ArticleAdmin)
+admin.site.register(Book, BookAdmin)

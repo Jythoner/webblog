@@ -1,7 +1,5 @@
 {% extends 'base.html' %}
-{% if title %}
-    {% block title %}{{ title }}{% endblock %}
-{% endif %}
+{% block title %}{{ title }}{% endblock %}
 {% block main %}
 
     {% if article_list %}
@@ -22,7 +20,7 @@
                         </div>
 
                         <div class="article-category" style="float: right">
-                            <a class="article-category-link">{{ post.last_accessed | date:'m-d-H:i' }}</a>
+                            <a class="article-category-link"><i class="fa fa-send" style="color: #707070"></i> {{ post.last_accessed | date:'m-d-H:i' }}</a>
                         </div>
 
                     </div>
