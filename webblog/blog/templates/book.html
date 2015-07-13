@@ -14,7 +14,11 @@
                     <header class="article-header">
                         <h1>
                             <a class="article-title"
-                               href="{% url 'blog:book_detail' book.en_title %}">{{ book.title }}</a>
+                               href="{% url 'blog:book_detail' book.en_title %}">{{ book.title }}
+                                {% if book.is_recommend %}
+                                    <span style="color:tomato"> ( 推荐 )</span>
+                                {% endif %}
+                            </a>
                         </h1>
 
                     </header>
@@ -24,8 +28,6 @@
                                 <a href="{{ book.image_140x180.url }}"><img src="{{ book.image_140x180.url }}"/></a>
                             </div>
                             <div class="col-sm-8">
-
-                                <small>图书描述:</small>
                                 <p>
                                     {{ book.summary | slice:"120" }}
                                     {% if book.summary > 120 %}

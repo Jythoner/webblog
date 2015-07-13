@@ -2072,11 +2072,7 @@ span.a.a5{
     padding-bottom: 20px;
     padding-top: 20px;
 }
-.row > .col-sm-8 > small {
-    font-size: 16px;
-    color: teal;
-    font-weight: bold;
-}
+
 .row > .col-sm-8 > p {
     font-size: 15px;
     letter-spacing: 1px;

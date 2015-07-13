@@ -4,29 +4,32 @@
 {% endblock %}
 
 {% block main %}
+    {% for date in date_list %}
+        <section class="archives-wrap">
+            <div class="archive-year-wrap">
+                <a class="archive-year"> {{ date.year }} </a>
+            </div>
+            <div class="archives">
+                {% for article in archive_list %}
+                    {% ifequal article.pub_time.year date.year %}
+                    <article class="archive-article">
+                        <div class="archive-article-inner">
+                            <header class="archive-article-header">
+                                <a class="archive-article-date">
+                                    <time>{{ article.pub_time | date:'m-d' }}</time>
+                                </a>
 
-    <section class="archives-wrap">
-        <div class="archive-year-wrap">
-            <a class="archive-year">2015</a>
-        </div>
-        <div class="archives">
-            {% for article in archive_list %}
-                <article class="archive-article">
-                    <div class="archive-article-inner">
-                        <header class="archive-article-header">
-                            <a class="archive-article-date">
-                                <time>{{ article.pub_time | date:'m-d' }}</time>
-                            </a>
+                                <h1>
+                                    <a class="archive-article-title"
+                                       href="{% url 'blog:detail' article.en_title %}">{{ article.title }}</a>
+                                </h1>
 
-                            <h1>
-                                <a class="archive-article-title"
-                                   href="{% url 'blog:detail' article.en_title %}">{{ article.title }}</a>
-                            </h1>
-
-                        </header>
-                    </div>
-                </article>
-            {% endfor %}
-        </div>
-    </section>
+                            </header>
+                        </div>
+                    </article>
+                    {% endifequal %}
+                {% endfor %}
+            </div>
+        </section>
+    {% endfor %}
 {% endblock %}

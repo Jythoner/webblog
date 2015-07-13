@@ -1,5 +1,4 @@
 # -*- coding:utf-8 -*-
-from gc import get_objects
 import logging
 
 from django.core.mail import send_mail, BadHeaderError
@@ -64,21 +63,18 @@ class LifeView(BaseMixin, ListView):
 
 
 class BookView(BaseMixin, ListView):
-    queryset = Book.objects.filter(is_recommend=0)
+    """图书推荐"""
+    queryset = Book.objects.all()
     context_object_name = 'book_list'
     template_name = 'book.html'
     paginate_by = 15
 
 
 class BookDetailView(BaseMixin, DetailView):
-    queryset = Book.objects.filter(is_recommend=0)
+    queryset = Book.objects.all()
     context_object_name = 'article'
     template_name = 'book_detail.html'
     slug_field = 'en_title'
-
-    def get_object(self, queryset=None):
-        self.object = super(BookDetailView, self).get_object()
-        return self.object
 
     def get_context_data(self, **kwargs):
         context = super(BookDetailView, self).get_context_data(**kwargs)
