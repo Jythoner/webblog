@@ -40,7 +40,7 @@ class ArticleAdmin(admin.ModelAdmin):
     fieldsets = [
         (u'文章信息', {'fields': ['author', 'title', 'en_title', 'summary', 'category', 'tag', ]}),
         (u'文章内容', {'fields': ['content', ]}),
-        (u'状态信息', {'fields': ['IT_AS_LIFE', 'status', 'rank', ]}),
+        (u'状态信息', {'fields': ['IT_AS_LIFE', 'status', 'not_read', 'rank', ]}),
         (u'发布时间', {'fields': ['pub_time', ]}),
         (u'创建时间', {'fields': ['create_time', 'update_time', ]}),
     ]

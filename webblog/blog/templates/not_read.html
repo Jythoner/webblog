@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="UTF-8">
 
-    <title>Contact | 河图洛书</title>
+    <title> {{ article.title }} | 河图洛书</title>
     <link rel="stylesheet" href="/static/css/oxp.css" type="text/css" media="screen">
     <link rel="stylesheet" href="/static/css/contactstyle.css" type="text/css" media="all">
     <link href="/static/css/css" rel="stylesheet" type="text/css">
@@ -18,17 +18,9 @@
     <a href="/" style="font-size: 15px; font-weight: bold; font-style: oblique; color: tomato">Back to Home</a>
 
     <div id="content">
-        <h1> Contact me </h1>
+        <h1> Sorry </h1>
 
-        <form action="/contact/" method="post" autocomplete="on">
-            {% csrf_token %}
-            {{ form.as_p }}
-
-            <p class="indication"> All fields with a <span class="required">*</span> are required</p>
-
-            <input type="submit" value=" ★  Send the mail !">
-
-        </form>
+        <h3> - - 对不起，您没有权限阅读 <span style="color: teal">{{ article.title }}</span> 这篇文章 - -</h3>
     </div>
 </div>
 

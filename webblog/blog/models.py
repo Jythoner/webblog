@@ -16,11 +16,6 @@ LIFE = (
     (1, u'生活随笔'),
 )
 
-Recommend = (
-    (1, u'推荐'),
-    (0, u'不推荐'),
-)
-
 
 class Category(models.Model):
     name = models.CharField(max_length=30, verbose_name=u'名称')
@@ -66,6 +61,7 @@ class Article(models.Model):
     last_accessed = models.DateTimeField(editable=False, blank=True, null=True, verbose_name=u'最近访问时间')
     IT_AS_LIFE = models.IntegerField(default=0, choices=LIFE, verbose_name=u'技术or随笔')
     status = models.IntegerField(default=0, choices=STATUS, verbose_name=u'状态')
+    not_read = models.BooleanField(default=0, verbose_name=u'禁止阅读')
     rank = models.IntegerField(default=0, verbose_name=u'排序')
 
     pub_time = models.DateTimeField(default=False, verbose_name=u'发布时间')
@@ -99,7 +95,7 @@ class Book(models.Model):
         format='JPEG', options={'quality': 95})
 
     rank = models.IntegerField(default=0, verbose_name=u'排序')
-    is_recommend = models.BooleanField(default=1, choices=Recommend, verbose_name=u'是否推荐')
+    is_recommend = models.BooleanField(default=0, verbose_name=u'是否推荐')
 
     create_time = models.DateTimeField(auto_now_add=True, verbose_name=u'创建时间')
     update_time = models.DateTimeField(auto_now=True, verbose_name=u'更新时间')

@@ -3,15 +3,16 @@ import logging
 
 from django.core.mail import send_mail, BadHeaderError
 from django.db.models import Q
-from django.http import Http404, HttpResponse
+from django.http import Http404, HttpResponse, HttpResponseRedirect
+from django.shortcuts import render_to_response
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, ArchiveIndexView, FormView
 
 from blog.form import ContactForm
 from .models import Category, Tag, Article, Book
 from webblog.settings import DEFAULT_FROM_EMAIL
-logger = logging.getLogger(__name__)
 
+logger = logging.getLogger(__name__)
 
 fruit = {
     0: 'Tomato',
@@ -22,6 +23,7 @@ fruit = {
     5: 'Cherry',
     6: 'Lemon',
 }
+
 
 class BaseMixin(object):
     """BaseMixin是最基本的视图类，所有类都通过继承BaseMixin类来加载生成的侧边栏数据"""
@@ -50,6 +52,7 @@ class IndexView(BaseMixin, ListView):
     def get_queryset(self):
         article_list = Article.objects.select_related('category').filter(status=0, IT_AS_LIFE=0)
         return article_list
+
 
 class LifeView(BaseMixin, ListView):
     """生活随笔栏目"""
@@ -152,12 +155,15 @@ class ArticleDetailView(BaseMixin, DetailView):
     template_name = 'detail.html'
     slug_field = 'en_title'
 
-    def get_object(self, queryset=None):
-        self.object = super(ArticleDetailView, self).get_object()
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if self.object.not_read:
+            return render_to_response('not_read.html', context={'article': self.object})
+
         self.object.view_time += 1
         self.object.last_accessed = timezone.now()
         self.object.save(update_fields=['view_time', 'last_accessed'])
-        return self.object
+        return super(ArticleDetailView, self).get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(ArticleDetailView, self).get_context_data(**kwargs)
@@ -212,4 +218,4 @@ class ContactView(FormView):
         except BadHeaderError:
             return HttpResponse('Invaild header fount.')
 
-        return super(ContactView, self).form_valid(form)
+        return HttpResponseRedirect(self.success_url)
