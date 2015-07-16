@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 import datetime
-
+import xadmin
 from django.contrib import admin
 from django.utils import timezone
 
@@ -9,7 +9,8 @@ from .models import Category, Tag, Article
 # Register your models here.
 
 
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(object):
+# class CategoryAdmin(admin.ModelAdmin):
     fieldsets = [
         (u'分类信息', {'fields': ['name', 'en_name', 'des', ]}),
         (u'状态信息', {'fields': ['status', 'rank', ]}),
@@ -23,7 +24,8 @@ class CategoryAdmin(admin.ModelAdmin):
     search_fields = ('name', 'en_name', )
 
 
-class TagAdmin(admin.ModelAdmin):
+class TagAdmin(object):
+# class TagAdmin(admin.ModelAdmin):
     fieldsets = [
         (u'标签信息', {'fields': ['name', 'en_name', ]}),
         (u'状态信息', {'fields': ['status', 'rank', ]}),
@@ -36,7 +38,8 @@ class TagAdmin(admin.ModelAdmin):
     search_fields = ('name', 'en_name', )
 
 
-class ArticleAdmin(admin.ModelAdmin):
+class ArticleAdmin(object):
+# class ArticleAdmin(admin.ModelAdmin):
     fieldsets = [
         (u'文章信息', {'fields': ['author', 'title', 'en_title', 'summary', 'category', 'tag', ]}),
         (u'文章内容', {'fields': ['content', ]}),
@@ -60,6 +63,6 @@ class ArticleAdmin(admin.ModelAdmin):
     was_published_recently.short_description = '最近发布?'
 
 
-admin.site.register(Category, CategoryAdmin)
-admin.site.register(Tag, TagAdmin)
-admin.site.register(Article, ArticleAdmin)
+xadmin.site.register(Category, CategoryAdmin)
+xadmin.site.register(Tag, TagAdmin)
+xadmin.site.register(Article, ArticleAdmin)

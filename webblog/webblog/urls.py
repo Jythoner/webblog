@@ -1,12 +1,14 @@
 from django.conf.urls import include, url, patterns
 from django.contrib import admin
 import settings
-import datetime
+import xadmin
+xadmin.autodiscover()
+
 urlpatterns = [
     # Examples:
     # url(r'^$', 'webblog.views.home', name='home'),
     url(r'', include('blog.url', namespace='blog')),
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^xadmin/', include(xadmin.site.urls)),
 ]
 
 if settings.DEBUG is False:
