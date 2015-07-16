@@ -9,7 +9,7 @@ from django.utils import timezone
 from django.views.generic import ListView, DetailView, ArchiveIndexView, FormView
 
 from blog.form import ContactForm
-from .models import Category, Tag, Article, Book
+from .models import Category, Tag, Article
 from webblog.settings import DEFAULT_FROM_EMAIL
 
 logger = logging.getLogger(__name__)
@@ -63,26 +63,6 @@ class LifeView(BaseMixin, ListView):
     def get_queryset(self):
         article_list = Article.objects.select_related('category').filter(status=0, IT_AS_LIFE=1)
         return article_list
-
-
-class BookView(BaseMixin, ListView):
-    """图书推荐"""
-    queryset = Book.objects.all()
-    context_object_name = 'book_list'
-    template_name = 'book.html'
-    paginate_by = 15
-
-
-class BookDetailView(BaseMixin, DetailView):
-    queryset = Book.objects.all()
-    context_object_name = 'article'
-    template_name = 'book_detail.html'
-    slug_field = 'en_title'
-
-    def get_context_data(self, **kwargs):
-        context = super(BookDetailView, self).get_context_data(**kwargs)
-        context['title'] = self.object.title + ' |'
-        return context
 
 
 class CategoryView(BaseMixin, ListView):
