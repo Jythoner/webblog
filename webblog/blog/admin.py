@@ -1,8 +1,5 @@
 # -*- coding:utf-8 -*-
-import datetime
-
 from django.contrib import admin
-from django.utils import timezone
 
 from .models import Category, Tag, Article
 
@@ -47,17 +44,11 @@ class ArticleAdmin(admin.ModelAdmin):
 
     filter_horizontal = ('tag', )
     readonly_fields = ('create_time', 'update_time', )
-    list_display = ['title', 'status', 'rank', 'was_published_recently', 'create_time', ]
+    list_display = ['title', 'status', 'rank', 'create_time', ]
     list_filter = ['status', 'create_time']
     list_display_links = ['title', ]
     search_fields = ('title', 'en_title', 'summary', )
     save_on_top = True
-
-    def was_published_recently(self, obj):
-        return timezone.now() - datetime.timedelta(days=7) <= obj.pub_time <= timezone.now()
-
-    was_published_recently.boolean = True
-    was_published_recently.short_description = '最近发布?'
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Tag, TagAdmin)
