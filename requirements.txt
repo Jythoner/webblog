@@ -5,8 +5,5 @@ Pygments
 mysql-python
 python-memcached
 BeautifulSoup
-Pillow
-django-imagekit
-duoshuo-python-sdk
 markdown2
-
+django-extlog

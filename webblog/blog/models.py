@@ -1,9 +1,10 @@
 # -*- coding:utf-8 -*-
+from datetime import datetime
+
 from django.contrib.auth.models import User
 from django.db import models
 import markdown2
-from imagekit.models import ImageSpecField
-from imagekit.processors import ResizeToFill
+
 
 STATUS = (
     (0, u'正常'),
@@ -61,10 +62,10 @@ class Article(models.Model):
     last_accessed = models.DateTimeField(editable=False, blank=True, null=True, verbose_name=u'最近访问时间')
     IT_AS_LIFE = models.IntegerField(default=0, choices=LIFE, verbose_name=u'技术or随笔')
     status = models.IntegerField(default=0, choices=STATUS, verbose_name=u'状态')
-    not_read = models.BooleanField(default=0, verbose_name=u'禁止阅读')
+    not_read = models.BooleanField(default=False, verbose_name=u'禁止阅读')
     rank = models.IntegerField(default=0, verbose_name=u'排序')
 
-    pub_time = models.DateTimeField(default=False, verbose_name=u'发布时间')
+    pub_time = models.DateTimeField(default=datetime.now, verbose_name=u'发布时间')
     create_time = models.DateTimeField(auto_now_add=True, verbose_name=u'创建时间')
     update_time = models.DateTimeField(auto_now=True, verbose_name=u'更新时间')
 

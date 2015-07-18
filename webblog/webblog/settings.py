@@ -40,7 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'blog',
     'debug_toolbar',
-    'imagekit',
+    'django_extlog',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -53,6 +53,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'django_extlog.middleware.AuditLoggingMiddleware'
 )
 
 ROOT_URLCONF = 'webblog.urls'
@@ -171,7 +172,7 @@ LOGGING = {
 
 LANGUAGE_CODE = 'zh-hans'
 
-TIME_ZONE = 'Asia/Beijing'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
@@ -196,7 +197,7 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'templates'),
+    os.path.join(BASE_DIR, 'blog/templates'),
 )
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
